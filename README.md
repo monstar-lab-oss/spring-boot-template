@@ -11,11 +11,7 @@ Import as a java project in an IDE of your choice.
 ### Code style
 Project uses [Google Java](https://google.github.io/styleguide/javaguide.html) code convention.
 
-`./mvnw validate` - performs code style analysis
-
-## App monitor
-* `curl http://localhost:8080/actuator` - returns list of available monitor related endpoints
-* `curl http://localhost:8080/actuator/health` - returns app health status
+`mvn validate` - performs code style analysis
 
 ## Working locally
 ### Database (variant 1, local Postgres)
@@ -48,8 +44,8 @@ Before running the app set the following env variables
 
 `DATABASE_PASSWORD=`
 
-Run `./mvnw spring-boot:run`
+Run `mvn spring-boot:run`
 
 
 ## Run tests
-`./mvnw test`
+`mvn test`
