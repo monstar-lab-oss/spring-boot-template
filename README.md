@@ -1,5 +1,10 @@
 # spring-boot-template
-Provides Sample of Project for Spring Boot and Java/Kotlin with maven setup
+Provides Sample of Project for Spring Boot and Java/Kotlin with maven setup.
+The project can serve as a template for starting a project in Spring Boot with 4 options:
+- Java - uses Java with the classic spring Boot recommended architecture
+- Java DDD - uses Java with DDD architecture
+- Kotlin - uses Kotlin with the classic spring Boot recommended architecture
+- Kotlin DDD - uses Kotlin with DDD architecture
 
 ## Requirements
 * JDK 17
@@ -8,29 +13,16 @@ Provides Sample of Project for Spring Boot and Java/Kotlin with maven setup
 ## How to code
 Import as a java project in an IDE of your choice.
 
-### Code style
-Project uses [Google Java](https://google.github.io/styleguide/javaguide.html) code convention.
-
-`mvn validate` - performs code style analysis
-
 ## Working locally
-### Database (variant 1, local Postgres)
+### How to run the app (variant 1, local with mvn commands, local Postgres)
 Install and configure Postgres locally. For mac follow the [link](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/).
 
 Install locally a Postgres client (eg [PgAdmin](https://www.pgadmin.org/download/pgadmin-4-macos/) )
 
-### Database (variant 2, docker Postgres)
+Depending on which of the 4 options you choose to follow:
+Run `mvn clean install -Dlanguage=kotlinDDD` (kotlin/java/javaDDD). This will generate the appropriate jar, that will be run later on.
 
-Create directory to store db files `/var/lib/postgresql/data/`
-
-Navigate to repository `./database` directory
-
-Edit database connection properties in `run_database.sh`
-
-Run `run_database.sh`
-
-## How to run the app
-Before running the app set the following env variables
+Before running the app set the following env variables (take advantage of the IDEA run configuration)
 
 `ACTIVE_PROFILE=` dev / qa / prod
 
@@ -44,8 +36,17 @@ Before running the app set the following env variables
 
 `DATABASE_PASSWORD=`
 
-Run `mvn spring-boot:run`
+Run `mvn spring-boot:run -f pom.xml`
 
+### How to run the app (variant 2, docker)
+Create directory to store db files `/var/lib/postgresql/data/`
+
+Depending on which of the 4 options (language/architecture) you choose to follow:
+`docker build --build-arg language=kotlinDDD -t template_app .` (`kotlinDDD` can be replaced with `kotlin`, `java` or `javaDDD`)
+
+Edit database connection properties in `run.sh`
+
+Run `sh run.sh`
 
 ## Run tests
 `mvn test`
