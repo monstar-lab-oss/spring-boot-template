@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
-import com.template.models.User
-import com.template.services.UserService
-import com.template.repositories.UserRepository
+import com.template.domain.models.User
+import com.template.domain.services.DomainUserService
+import com.template.domain.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -46,13 +46,12 @@ import org.springframework.http.MediaType
 @AutoConfigureTestDatabase
 @Import(TestEntityManagerAutoConfiguration::class)
 class UserControllerKTTest(@Autowired val mockMvc: MockMvc) {
-  @Mock lateinit var userService: UserService
+  @Mock lateinit var userService: DomainUserService
   @Mock lateinit var userRepository: UserRepository
 
   @BeforeEach
   fun setUp(): Unit {
     openMocks(this)
-    userService = spy(UserService(userRepository))
   }
 
   @Test
@@ -98,7 +97,7 @@ class UserControllerKTTest(@Autowired val mockMvc: MockMvc) {
   @Test
   @DirtiesContext(methodMode = MethodMode.AFTER_METHOD)
   @Sql(scripts = ["classpath:scripts/create_user.sql"])
-  @Throws(Exception::class)
+  @Throws(java.lang.Exception::class)
   fun test_get_one() {
     mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
             .andExpect(MockMvcResultMatchers.status().isOk())
@@ -110,7 +109,7 @@ class UserControllerKTTest(@Autowired val mockMvc: MockMvc) {
   @DirtiesContext(methodMode = MethodMode.AFTER_METHOD)
   @Throws(Exception::class)
   fun test_get_one_doesnt_exist() {
-    Assertions.assertThrows<Exception>(Exception::class.java, org.junit.jupiter.api.function.Executable { mockMvc.perform(MockMvcRequestBuilders.get("/users/1")) })
+    org.junit.jupiter.api.Assertions.assertThrows<Exception>(Exception::class.java, org.junit.jupiter.api.function.Executable { mockMvc.perform(MockMvcRequestBuilders.get("/users/1")) })
   }
 
   @Test
@@ -121,8 +120,8 @@ class UserControllerKTTest(@Autowired val mockMvc: MockMvc) {
     val request = "{\"firstName\":\"name\", \"lastName\":\"surname\"}"
     mockMvc.perform(MockMvcRequestBuilders.put("/users/1")
             .content(request)
-            .contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON))
+            .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+            .accept(org.springframework.http.MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("name"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("surname"))
