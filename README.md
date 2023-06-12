@@ -20,6 +20,7 @@ Install and configure Postgres locally. For mac follow the [link](https://www.sq
 Install locally a Postgres client (eg [PgAdmin](https://www.pgadmin.org/download/pgadmin-4-macos/) )
 
 Depending on which of the 4 options you choose to follow:
+Check your java version. It should be higher than Java 17.
 Run `mvn clean install -Dlanguage=kotlinDDD` (kotlin/java/javaDDD). This will generate the appropriate jar, that will be run later on.
 
 Before running the app set the following env variables (take advantage of the IDEA run configuration)
