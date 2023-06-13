@@ -2,9 +2,9 @@
 Provides Sample of Project for Spring Boot and Java/Kotlin with maven setup.
 The project can serve as a template for starting a project in Spring Boot with 4 options:
 - Java - uses Java with the classic spring Boot recommended architecture
-- Java DDD - uses Java with DDD architecture
+- Java Hexagonal - uses Java with Hexagonal architecture
 - Kotlin - uses Kotlin with the classic spring Boot recommended architecture
-- Kotlin DDD - uses Kotlin with DDD architecture
+- Kotlin Hexagonal - uses Kotlin with Hexagonal architecture
 
 ## Requirements
 * JDK 17
@@ -20,8 +20,7 @@ Install and configure Postgres locally. For mac follow the [link](https://www.sq
 Install locally a Postgres client (eg [PgAdmin](https://www.pgadmin.org/download/pgadmin-4-macos/) )
 
 Depending on which of the 4 options you choose to follow:
-Check your java version. It should be higher than Java 17.
-Run `mvn clean install -Dlanguage=kotlinDDD` (kotlin/java/javaDDD). This will generate the appropriate jar, that will be run later on.
+Run `mvn clean install -Dlanguage=kotlinHexagonal` (kotlin/java/javaHexagonal). This will generate the appropriate jar, that will be run later on.
 
 Before running the app set the following env variables (take advantage of the IDEA run configuration)
 
@@ -43,7 +42,7 @@ Run `mvn spring-boot:run -f pom.xml`
 Create directory to store db files `/var/lib/postgresql/data/`
 
 Depending on which of the 4 options (language/architecture) you choose to follow:
-`docker build --build-arg language=kotlinDDD -t template_app .` (`kotlinDDD` can be replaced with `kotlin`, `java` or `javaDDD`)
+`docker build --build-arg language=kotlinHexagonal -t template_app .` (`kotlinHexagonal` can be replaced with `kotlin`, `java` or `javaHexagonal`)
 
 Edit database connection properties in `run.sh`
 
