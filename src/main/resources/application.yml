@@ -1,14 +1,13 @@
 server:
-  port: 80
+  port: 8080
   error.include-message: always
 spring:
   profiles:
     active: dev
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5433}/${DATABASE_NAME:template}
+    username: ${DATABASE_USER:gls}
+    password: ${DATABASE_PASSWORD:gls}
   jpa:
     hibernate:
       ddl-auto: update
